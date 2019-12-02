@@ -37,7 +37,7 @@ class MainScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: FutureBuilder<List<Photo>>(
-          future: fetchPhoto(http.Client()),
+          future: fetchPhotos(http.Client()),
           builder: (context, snapshot) {
             if (snapshot.hasError)
               return Center(
@@ -155,7 +155,7 @@ class PhotoItem extends StatelessWidget {
   }
 }
 
-Future<List<Photo>> fetchPhoto(http.Client client) async {
+Future<List<Photo>> fetchPhotos(http.Client client) async {
   final response =
       await client.get('https://picsum.photos/v2/list?page=2&limit=100');
   return compute(Photo.parsePhotos, response.body);
