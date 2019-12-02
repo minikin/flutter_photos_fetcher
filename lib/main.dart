@@ -80,7 +80,10 @@ class PhotoDetails extends StatelessWidget {
         child: Container(
           child: Column(
             children: <Widget>[
-              Image.network(photo.downloadUrl),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                child: Image.network(photo.downloadUrl),
+              ),
               SizedBox(height: 8),
               Text(
                 'Author: ${photo.author}',
@@ -105,6 +108,7 @@ class PhotosList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
+      key: PageStorageKey('yourkey'),
       itemCount: photosList.length,
       itemBuilder: (context, index) {
         return PhotoItem(
