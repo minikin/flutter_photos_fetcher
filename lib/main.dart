@@ -134,9 +134,10 @@ class PhotoItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
+    return GestureDetector(
       key: UniqueKey(),
       onTap: () => onTap(photo),
+      behavior: HitTestBehavior.opaque,
       child: Container(
         padding: EdgeInsets.all(4),
         child: Image.network(
