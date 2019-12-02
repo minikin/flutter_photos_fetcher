@@ -108,7 +108,6 @@ class PhotosList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      key: PageStorageKey('yourkey'),
       itemCount: photosList.length,
       itemBuilder: (context, index) {
         return PhotoItem(
