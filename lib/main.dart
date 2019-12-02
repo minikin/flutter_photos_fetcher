@@ -40,7 +40,9 @@ class MainScreen extends StatelessWidget {
           future: fetchPhoto(http.Client()),
           builder: (context, snapshot) {
             if (snapshot.hasError)
-              return Text('Something went wrong:\n ${snapshot.error}');
+              return Center(
+                child: Text('Something went wrong:\n ${snapshot.error}'),
+              );
 
             return snapshot.hasData
                 ? PhotosList(photosList: snapshot.data)
@@ -141,7 +143,7 @@ class PhotoItem extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(4),
         child: Image.network(
-          photo.computedImagePreviewUrl(),
+          photo.imagePreviewUrl,
           fit: BoxFit.cover,
         ),
       ),
@@ -188,7 +190,5 @@ class Photo {
     return parsed.map<Photo>((json) => Photo.fromJson(json)).toList();
   }
 
-  String computedImagePreviewUrl() {
-    return 'https://picsum.photos/id/${this.id}/400/400';
-  }
+  String get imagePreviewUrl => 'https://picsum.photos/id/${this.id}/400/400';
 }
