@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  Flutter demo project for React Native vs Flatter Meet-up @ Factory, Berlin [12.12.2109]</a>
+  Flutter demo project for React Native vs Flutter Meet-up @ Factory, Berlin [12.12.2109]</a>
 </p>
 
 <p align="center">
