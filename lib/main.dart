@@ -156,7 +156,7 @@ class PhotoItem extends StatelessWidget {
 
 Future<List<Photo>> fetchPhotos(http.Client client) async {
   final response =
-      await client.get('https://picsum.photos/v2/list?page=2&limit=100');
+      await client.get('https://picsum.photos/v2/list?page=2&limit=50');
   return compute(Photo.parsePhotos, response.body);
 }
 
