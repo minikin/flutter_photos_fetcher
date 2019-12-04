@@ -15,6 +15,25 @@
   <a href="https://app.bitrise.io/app/9959018b3579c141">
     <img src="https://app.bitrise.io/app/9959018b3579c141/status.svg?token=8dIv4a-YnmdFbSK_38_mFw" alt="Current Build Status." />
   </a>
+
+  <table style="width:100%">
+  <tr>
+    <th>Android</th>
+    <th>iOS</th>
+  </tr>
+  <tr>
+    <td>
+    <center>
+    <img src="https://i.ibb.co/N3G7Qp4/android.gif" alt="Photos Fetcher on Android" />
+    </center>
+  </td>
+    <td>
+    <center>
+    <img src="https://i.ibb.co/yR9y0tG/ios.gif" alt="Photos Fetcher on iOS" />
+     </center>
+  </td>
+  </tr>
+</table>
 </p>
 
 ## Contents
