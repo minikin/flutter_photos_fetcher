@@ -10,7 +10,7 @@
 
 <p align="center">
   <a href="https://github.com/minikin/flutter_photos_fetcher/blob/master/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Bloc is released under the MIT license." />
+    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Photos Fetcher is released under the MIT license." />
   </a>
   <a href="https://app.bitrise.io/app/9959018b3579c141">
     <img src="https://app.bitrise.io/app/9959018b3579c141/status.svg?token=8dIv4a-YnmdFbSK_38_mFw" alt="Current Build Status." />
