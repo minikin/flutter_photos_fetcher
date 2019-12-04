@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/minikin/flutter_photos_fetcher/master/LICENSE">
+  <a href="https://github.com/minikin/flutter_photos_fetcher/blob/master/LICENSE">
     <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Bloc is released under the MIT license." />
   </a>
   <a href="https://app.bitrise.io/app/9959018b3579c141">
@@ -50,5 +50,5 @@ If you have any questions ping me on twitter: [@minikin](https://twitter.com/min
 
 ## 📄 License
 
-Bloc is available under the MIT license.
-See the [LICENSE](https://github.com/minikin/bloc/blob/develop/LICENSE) file for more info.
+Photos Fetcher is available under the MIT license.
+See the [LICENSE](https://github.com/minikin/flutter_photos_fetcher/blob/master/LICENSE) file for more info.
