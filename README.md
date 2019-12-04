@@ -15,7 +15,7 @@
   <a href="https://app.bitrise.io/app/9959018b3579c141">
     <img src="https://app.bitrise.io/app/9959018b3579c141/status.svg?token=8dIv4a-YnmdFbSK_38_mFw" alt="Current Build Status." />
   </a>
-
+<center>
   <table style="width:100%">
   <tr>
     <th>Android</th>
@@ -34,6 +34,7 @@
   </td>
   </tr>
 </table>
+</center>
 </p>
 
 ## Contents
