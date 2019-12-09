@@ -27,17 +27,12 @@ class MainScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         brightness: Brightness.light,
         elevation: 1,
-        title: Text(
-          'Photos',
-          style: TextStyle(
-            fontSize: 24,
-            color: Colors.black,
-          ),
-        ),
+        title:
+            Text('Photos', style: TextStyle(fontSize: 24, color: Colors.black)),
       ),
       body: SafeArea(
         child: FutureBuilder<List<Photo>>(
-          future: fetchPhotos(http.Client()),
+          future: fetchPhotos(client: http.Client()),
           builder: (context, snapshot) {
             if (snapshot.hasError)
               return Center(
@@ -56,10 +51,7 @@ class MainScreen extends StatelessWidget {
 
 class PhotoDetails extends StatelessWidget {
   final Photo photo;
-  const PhotoDetails({
-    @required this.photo,
-    Key key,
-  }) : super(key: key);
+  const PhotoDetails({@required this.photo, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -71,9 +63,7 @@ class PhotoDetails extends StatelessWidget {
         iconTheme: IconThemeData(color: Colors.black),
         title: Text(
           photo.author,
-          style: TextStyle(
-            color: Colors.black,
-          ),
+          style: TextStyle(color: Colors.black),
         ),
       ),
       body: SafeArea(
@@ -85,10 +75,7 @@ class PhotoDetails extends StatelessWidget {
                 child: Image.network(photo.downloadUrl),
               ),
               SizedBox(height: 8),
-              Text(
-                'Author: ${photo.author}',
-                style: TextStyle(fontSize: 24),
-              ),
+              Text('Author: ${photo.author}', style: TextStyle(fontSize: 24)),
             ],
           ),
         ),
@@ -100,10 +87,7 @@ class PhotoDetails extends StatelessWidget {
 class PhotosList extends StatelessWidget {
   final List<Photo> photosList;
 
-  const PhotosList({
-    @required this.photosList,
-    Key key,
-  }) : super(key: key);
+  const PhotosList({@required this.photosList, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -114,12 +98,11 @@ class PhotosList extends StatelessWidget {
           photo: photosList[index],
           onTap: (photo) {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                settings: RouteSettings(name: '/photo-${photo.id}'),
-                builder: (context) => PhotoDetails(photo: photo),
-              ),
-            );
+                context,
+                MaterialPageRoute(
+                  settings: RouteSettings(name: '/photo-${photo.id}'),
+                  builder: (context) => PhotoDetails(photo: photo),
+                ));
           },
         );
       },
@@ -145,16 +128,15 @@ class PhotoItem extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: Container(
         padding: EdgeInsets.all(4),
-        child: Image.network(
-          photo.imagePreviewUrl,
-          fit: BoxFit.cover,
-        ),
+        child: Image.network(photo.imagePreviewUrl, fit: BoxFit.cover),
       ),
     );
   }
 }
 
-Future<List<Photo>> fetchPhotos(http.Client client) async {
+Future<List<Photo>> fetchPhotos({
+  @required http.Client client,
+}) async {
   final response =
       await client.get('https://picsum.photos/v2/list?page=2&limit=50');
   return compute(Photo.parsePhotos, response.body);
