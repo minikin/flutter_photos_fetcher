@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' show Client;
 
 void main() => runApp(const App());
 
@@ -37,7 +39,7 @@ class MainScreen extends StatelessWidget {
       ),
       body: SafeArea(
         child: FutureBuilder<List<Photo>>(
-          future: fetchPhotos(http.Client()),
+          future: fetchPhotos(client: Client()),
           builder: (context, snapshot) {
             if (snapshot.hasError)
               return Center(
@@ -48,49 +50,6 @@ class MainScreen extends StatelessWidget {
                 ? PhotosList(photosList: snapshot.data)
                 : Center(child: CircularProgressIndicator());
           },
-        ),
-      ),
-    );
-  }
-}
-
-class PhotoDetails extends StatelessWidget {
-  final Photo photo;
-  const PhotoDetails({
-    @required this.photo,
-    Key key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        brightness: Brightness.light,
-        elevation: 1,
-        iconTheme: IconThemeData(color: Colors.black),
-        title: Text(
-          photo.author,
-          style: TextStyle(
-            color: Colors.black,
-          ),
-        ),
-      ),
-      body: SafeArea(
-        child: Container(
-          child: Column(
-            children: <Widget>[
-              Container(
-                width: MediaQuery.of(context).size.width,
-                child: Image.network(photo.downloadUrl),
-              ),
-              SizedBox(height: 8),
-              Text(
-                'Author: ${photo.author}',
-                style: TextStyle(fontSize: 24),
-              ),
-            ],
-          ),
         ),
       ),
     );
@@ -112,18 +71,49 @@ class PhotosList extends StatelessWidget {
       itemBuilder: (context, index) {
         return PhotoItem(
           photo: photosList[index],
-          onTap: (photo) {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                settings: RouteSettings(name: '/photo-${photo.id}'),
-                builder: (context) => PhotoDetails(photo: photo),
-              ),
-            );
-          },
+          onTap: (photo) => _showAlert(context: context, photo: photo),
         );
       },
     );
+  }
+
+  void _showAlert({
+    @required BuildContext context,
+    @required Photo photo,
+  }) {
+    if (Platform.isIOS) {
+      showDialog(
+        context: context,
+        builder: (_) {
+          return CupertinoAlertDialog(
+            title: Text('Author'),
+            content: Text(photo.author.toUpperCase()),
+            actions: <Widget>[
+              CupertinoButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          );
+        },
+      );
+    } else {
+      showDialog(
+        context: context,
+        builder: (_) {
+          return AlertDialog(
+            title: Text('Author'),
+            content: Text(photo.author.toUpperCase()),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('OK'),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            ],
+          );
+        },
+      );
+    }
   }
 }
 
@@ -140,9 +130,7 @@ class PhotoItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      key: UniqueKey(),
       onTap: () => onTap(photo),
-      behavior: HitTestBehavior.opaque,
       child: Container(
         padding: EdgeInsets.all(4),
         child: Image.network(
@@ -154,7 +142,7 @@ class PhotoItem extends StatelessWidget {
   }
 }
 
-Future<List<Photo>> fetchPhotos(http.Client client) async {
+Future<List<Photo>> fetchPhotos({@required Client client}) async {
   final response =
       await client.get('https://picsum.photos/v2/list?page=2&limit=50');
   return compute(Photo.parsePhotos, response.body);
