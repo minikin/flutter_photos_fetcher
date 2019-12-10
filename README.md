@@ -24,12 +24,12 @@
   <tr>
     <td>
     <center>
-    <img src="https://i.ibb.co/gb0Z0ZF/android.gif" alt="Photos Fetcher on Android" />
+    <img src="assets/android.gif?raw=true" alt="Photos Fetcher on Android" />
     </center>
   </td>
     <td>
     <center>
-    <img src="https://i.ibb.co/R4QcVJp/ios.gif" alt="Photos Fetcher on iOS" />
+    <img src="assets/ios.gif?raw=true" alt="Photos Fetcher on iOS" />
      </center>
   </td>
   </tr>
